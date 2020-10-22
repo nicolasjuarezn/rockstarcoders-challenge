@@ -1,4 +1,4 @@
-class MovieService {
+class MoviesService {
   constructor() {
     this.APIKey = "0650dc23d9158fa968f70eaad71ff3fd";
     this.baseURL = "https://api.themoviedb.org/3/";
@@ -29,4 +29,4 @@ class MovieService {
   }
 }
 
-export const movieService = new MovieService();
+export const moviesService = new MoviesService();

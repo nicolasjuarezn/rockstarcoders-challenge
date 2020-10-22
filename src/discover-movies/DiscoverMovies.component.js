@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { movieService } from "../services/movies.service";
+import { moviesService } from "../services/movies.service";
 
 export function DiscoverMovies() {
   const [movies, setMovies] = useState([]);
 
   useEffect(
     function getMovies() {
-      movieService.getDiscoverMovies().then(setMovies);
+      moviesService.getDiscoverMovies().then(setMovies);
     },
     [setMovies]
   );
