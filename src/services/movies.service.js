@@ -27,6 +27,21 @@ class MoviesService {
       console.warn("discoverMovies", error);
     }
   }
+
+  async searchMovies(value) {
+    try {
+      const searchMoviesURL = this.buildURL({
+        path: "search/movie",
+        query: `&query=${value}&page=1`,
+      });
+
+      const { results } = await this.fetchProvider(searchMoviesURL);
+
+      return results;
+    } catch (error) {
+      console.warn("searchMovies", error);
+    }
+  }
 }
 
 export const moviesService = new MoviesService();
