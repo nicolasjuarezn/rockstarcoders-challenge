@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { moviesService } from "../services/movies.service";
+import { SearchMovies } from "./components/SearchMovies/SearchMovies.component";
 
 export function DiscoverMovies() {
   const [movies, setMovies] = useState([]);
+  const [movieSearchResult, setMovieSearchResults] = useState([]);
 
   useEffect(
     function getMovies() {
@@ -11,13 +13,18 @@ export function DiscoverMovies() {
     [setMovies]
   );
 
+  const moviesList = movieSearchResult.length ? movieSearchResult : movies;
+
   return (
-    <ul>
-      {movies.map(({ title, id }) => (
-        <li key={id}>
-          <a href="#1">{title}</a>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <SearchMovies onResults={setMovieSearchResults} />
+      <ul>
+        {moviesList.map(({ title, id }) => (
+          <li key={id}>
+            <a href="#1">{title}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
