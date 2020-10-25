@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 export function MoviesList({ movies, errorMessageResult }) {
   return (
@@ -7,9 +8,9 @@ export function MoviesList({ movies, errorMessageResult }) {
       <ul>
         {movies.map(({ title, id, vote_average }) => (
           <li key={id}>
-            <a href="#1">
+            <Link to={`movie/${id}`}>
               {title} - {vote_average}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
