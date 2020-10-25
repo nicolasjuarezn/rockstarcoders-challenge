@@ -22,6 +22,7 @@ export function MovieDetail({
       <Link to="/">Go back to home</Link>
       <h1>{movieDetail.original_title}</h1>
       <img src={movieDetail.poster_path} alt={movieDetail.original_title} />
+      <img src={movieDetail.backdrop_path} alt={movieDetail.original_title} />
     </div>
   ) : (
     <Loader />
