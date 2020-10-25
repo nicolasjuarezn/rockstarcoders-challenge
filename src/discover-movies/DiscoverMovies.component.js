@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useReducer } from "react";
+import { Loader } from "../shared-components/Loader/Loader.component";
 import { MoviesList } from "./components/MoviesList/MoviesList.component";
 import { RateFilterMovies } from "./components/RateFilterMovies/RateFilterMovies.component";
 import { SearchMovies } from "./components/SearchMovies/SearchMovies.component";
@@ -52,7 +53,7 @@ export function DiscoverMovies() {
         dataToFilter={dataToFilter}
       />
       {state.isLoading ? (
-        "...Loading"
+        <Loader />
       ) : (
         <MoviesList
           movies={moviesToRender}
