@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import { moviesService } from "../../../services/movies.service";
+import { fetchSearchMovies } from "../../store/discover-movies.async-actions";
 
 export function SearchMovies({ onResults }) {
   const searchInput = useRef(null);
@@ -9,11 +9,7 @@ export function SearchMovies({ onResults }) {
     event.preventDefault();
     const searchValue = searchInput.current.value;
 
-    if (searchValue) {
-      moviesService.searchMovies(searchValue).then(onResults);
-    } else {
-      onResults([]);
-    }
+    fetchSearchMovies(onResults, searchValue);
   };
 
   return (
