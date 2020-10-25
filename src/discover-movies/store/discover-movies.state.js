@@ -2,8 +2,8 @@ import {
   SET_FILTERED_MOVIES,
   SET_MOVIES,
   SET_SEARCH_RESULTS,
-  START_FETCH_LOADING,
-  STOP_FETCH_LOADING,
+  START_LOADING,
+  STOP_LOADING,
 } from "./discover-movies.action-types";
 
 export const fetchStatesInitialState = {
@@ -16,9 +16,9 @@ export const fetchStatesInitialState = {
 
 export function fetchStatesReducer(state, action) {
   switch (action.type) {
-    case START_FETCH_LOADING:
+    case START_LOADING:
       return { ...state, isLoading: true };
-    case STOP_FETCH_LOADING:
+    case STOP_LOADING:
       return { ...state, isLoading: false };
     case SET_MOVIES:
       return { ...state, movies: action.movies, isLoading: false };

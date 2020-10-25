@@ -2,16 +2,16 @@ import {
   SET_FILTERED_MOVIES,
   SET_MOVIES,
   SET_SEARCH_RESULTS,
-  START_FETCH_LOADING,
-  STOP_FETCH_LOADING,
+  START_LOADING,
+  STOP_LOADING,
 } from "./discover-movies.action-types";
 
 export const startFetchLoading = () => ({
-  type: START_FETCH_LOADING,
+  type: START_LOADING,
 });
 
 export const stopFetchLoading = () => ({
-  type: STOP_FETCH_LOADING,
+  type: STOP_LOADING,
 });
 
 export const setMovies = (movies) => ({

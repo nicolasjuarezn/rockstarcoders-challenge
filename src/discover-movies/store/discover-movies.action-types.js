@@ -1,5 +1,5 @@
-export const START_FETCH_LOADING = "START_FETCH_LOADING";
-export const STOP_FETCH_LOADING = "STOP_FETCH_LOADING";
-export const SET_MOVIES = "SET_MOVIES";
-export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
-export const SET_FILTERED_MOVIES = "SET_FILTERED_MOVIES";
+export const START_LOADING = "response/startLoading";
+export const STOP_LOADING = "response/stopLoading";
+export const SET_MOVIES = "discover-movies/setMovies";
+export const SET_SEARCH_RESULTS = "discover-movies/setSearchResults";
+export const SET_FILTERED_MOVIES = "discover-movies/setFilteredMovies";
