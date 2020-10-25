@@ -1,4 +1,5 @@
 import {
+  SET_FILTERED_MOVIES,
   SET_MOVIES,
   SET_SEARCH_RESULTS,
   START_FETCH_LOADING,
@@ -6,10 +7,11 @@ import {
 } from "./discover-movies.action-types";
 
 export const fetchStatesInitialState = {
+  filteredMovies: [],
+  isFiltering: false,
   isLoading: false,
   movies: [],
   movieSearchResults: [],
-  filteredMovies: [],
 };
 
 export function fetchStatesReducer(state, action) {
@@ -26,6 +28,12 @@ export function fetchStatesReducer(state, action) {
         movieSearchResults: action.movieSearchResults,
         isSearching: action.isSearching,
         isLoading: false,
+      };
+    case SET_FILTERED_MOVIES:
+      return {
+        ...state,
+        filteredMovies: action.filteredMovies,
+        isFiltering: action.isFiltering,
       };
     default:
       return state;

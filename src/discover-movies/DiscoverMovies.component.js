@@ -1,7 +1,11 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import { RateFilterMovies } from "./components/RateFilterMovies/RateFilterMovies.component";
 import { SearchMovies } from "./components/SearchMovies/SearchMovies.component";
-import { fetchMoviesToDiscover } from "./store/discover-movies.async-actions";
+import { setFilteredMovies } from "./store/discover-movies.actions";
+import {
+  fetchMoviesToDiscover,
+  fetchSearchMovies,
+} from "./store/discover-movies.async-actions";
 import {
   fetchStatesInitialState,
   fetchStatesReducer,
@@ -13,11 +17,6 @@ export function DiscoverMovies() {
     fetchStatesInitialState
   );
 
-  const [filteredMovies, setFilteredMovies] = useState({
-    movies: [],
-    isFiltering: false,
-  });
-
   useEffect(
     function getMovies() {
       fetchMoviesToDiscover(dispatch);
@@ -28,7 +27,7 @@ export function DiscoverMovies() {
   const searchResults =
     Boolean(state.movieSearchResults.length) && state.movieSearchResults;
   const filterResults =
-    Boolean(filteredMovies.movies.length) && filteredMovies.movies;
+    Boolean(state.filteredMovies.length) && state.filteredMovies;
 
   const searchError =
     state.isSearching &&
@@ -36,7 +35,7 @@ export function DiscoverMovies() {
     "No results for your search criteria";
 
   const filterError =
-    filteredMovies.isFiltering &&
+    state.isFiltering &&
     !filterResults &&
     "No results for your filtering criteria";
 
@@ -45,9 +44,13 @@ export function DiscoverMovies() {
 
   return (
     <div>
-      <SearchMovies onResults={dispatch} />
+      <SearchMovies
+        onSubmit={(searchValue) => fetchSearchMovies(dispatch, searchValue)}
+      />
       <RateFilterMovies
-        onFilterChange={setFilteredMovies}
+        onFilterChange={({ filteredMovies, isFiltering }) => {
+          dispatch(setFilteredMovies({ filteredMovies, isFiltering }));
+        }}
         dataToFilter={moviesList}
       />
       {state.isLoading

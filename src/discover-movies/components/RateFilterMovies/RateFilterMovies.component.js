@@ -16,16 +16,15 @@ export function RateFilterMovies({
     const maxRange = minRange + filterStep;
     const clearFilter = activeRate === elementId;
 
-    const movies = dataToFilter.filter(({ vote_average }) => {
+    const filteredMovies = dataToFilter.filter(({ vote_average }) => {
       return (
         vote_average >= minRange && vote_average <= maxRange && !clearFilter
       );
     });
 
     const newActiveRate = clearFilter ? -1 : elementId;
-
     setActiveRate(newActiveRate);
-    onFilterChange({ movies, isFiltering: newActiveRate > -1 });
+    onFilterChange({ filteredMovies, isFiltering: newActiveRate > -1 });
   };
 
   return (

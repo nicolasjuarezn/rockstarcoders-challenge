@@ -1,15 +1,13 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import { fetchSearchMovies } from "../../store/discover-movies.async-actions";
 
-export function SearchMovies({ onResults }) {
+export function SearchMovies({ onSubmit }) {
   const searchInput = useRef(null);
 
   const onSubmitSearch = (event) => {
     event.preventDefault();
     const searchValue = searchInput.current.value;
-
-    fetchSearchMovies(onResults, searchValue);
+    onSubmit(searchValue);
   };
 
   return (
@@ -27,5 +25,5 @@ export function SearchMovies({ onResults }) {
 }
 
 SearchMovies.propTypes = {
-  onResults: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
