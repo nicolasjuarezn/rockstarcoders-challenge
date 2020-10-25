@@ -5,6 +5,7 @@ export function RateFilterMovies({
   onFilterChange,
   maxScoreRange,
   starsSteps,
+  dataToFilter,
 }) {
   const [activeRate, setActiveRate] = useState(-1);
 
@@ -13,10 +14,18 @@ export function RateFilterMovies({
     const filterStep = maxScoreRange / starsSteps;
     const minRange = elementId * filterStep;
     const maxRange = minRange + filterStep;
-
     const clearFilter = activeRate === elementId;
-    onFilterChange({ minRange, maxRange, clearFilter });
-    setActiveRate(clearFilter ? -1 : elementId);
+
+    const movies = dataToFilter.filter(({ vote_average }) => {
+      return (
+        vote_average >= minRange && vote_average <= maxRange && !clearFilter
+      );
+    });
+
+    const newActiveRate = clearFilter ? -1 : elementId;
+
+    setActiveRate(newActiveRate);
+    onFilterChange({ movies, isFiltering: newActiveRate > -1 });
   };
 
   return (
@@ -41,10 +50,12 @@ export function RateFilterMovies({
 RateFilterMovies.defaultProps = {
   maxScoreRange: 10,
   starsSteps: 5,
+  dataToFilter: [],
 };
 
 RateFilterMovies.propTypes = {
   onFilterChange: PropTypes.func.isRequired,
   maxScoreRange: PropTypes.number,
   starsSteps: PropTypes.number,
+  dataToFilter: PropTypes.array,
 };
