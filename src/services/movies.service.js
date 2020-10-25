@@ -2,9 +2,10 @@ class MoviesService {
   constructor() {
     this.APIKey = "0650dc23d9158fa968f70eaad71ff3fd";
     this.baseURL = "https://api.themoviedb.org/3/";
+    this.baseImageURL = "https://image.tmdb.org/t/p/w500";
   }
 
-  buildURL({ path, query }) {
+  buildURL({ path, query = "" }) {
     return `${this.baseURL}${path}?api_key=${this.APIKey}${query}`;
   }
 
@@ -35,6 +36,24 @@ class MoviesService {
 
     const { results } = await this.fetchProvider(searchMoviesURL);
     return results;
+  }
+
+  async getMovieDetailById(id) {
+    const movieDetailURL = this.buildURL({
+      path: `movie/${id}`,
+    });
+
+    const {
+      backdrop_path,
+      poster_path,
+      ...response
+    } = await this.fetchProvider(movieDetailURL);
+
+    return {
+      ...response,
+      backdrop_path: `${this.baseImageURL}${backdrop_path}`,
+      poster_path: `${this.baseImageURL}${poster_path}`,
+    };
   }
 }
 
