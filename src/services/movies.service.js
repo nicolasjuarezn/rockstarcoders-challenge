@@ -2,11 +2,18 @@ class MoviesService {
   constructor() {
     this.APIKey = "0650dc23d9158fa968f70eaad71ff3fd";
     this.baseURL = "https://api.themoviedb.org/3/";
-    this.baseImageURL = "https://image.tmdb.org/t/p/w500";
+    this.baseImageURL = "https://image.tmdb.org/t/p/";
   }
 
   buildURL({ path, query = "" }) {
     return `${this.baseURL}${path}?api_key=${this.APIKey}${query}`;
+  }
+
+  parseMoviesList(movies) {
+    return movies.map(({ poster_path, ...movie }) => ({
+      poster_path: this.parseResponseImages(poster_path),
+      ...movie,
+    }));
   }
 
   async fetchProvider() {
@@ -18,6 +25,10 @@ class MoviesService {
     }
   }
 
+  parseResponseImages(imageSRC, size = "w154") {
+    return `${this.baseImageURL}${size}/${imageSRC}`;
+  }
+
   async getDiscoverMovies() {
     const discoverMoviesURL = this.buildURL({
       path: "discover/movie",
@@ -25,7 +36,7 @@ class MoviesService {
     });
 
     const { results } = await this.fetchProvider(discoverMoviesURL);
-    return results;
+    return this.parseMoviesList(results);
   }
 
   async searchMovies(value) {
@@ -35,7 +46,7 @@ class MoviesService {
     });
 
     const { results } = await this.fetchProvider(searchMoviesURL);
-    return results;
+    return this.parseMoviesList(results);
   }
 
   async getMovieDetailById(id) {
@@ -51,8 +62,8 @@ class MoviesService {
 
     return {
       ...response,
-      backdrop_path: `${this.baseImageURL}${backdrop_path}`,
-      poster_path: `${this.baseImageURL}${poster_path}`,
+      backdrop_path: this.parseResponseImages(backdrop_path, "w1280"),
+      poster_path: this.parseResponseImages(poster_path),
     };
   }
 }
