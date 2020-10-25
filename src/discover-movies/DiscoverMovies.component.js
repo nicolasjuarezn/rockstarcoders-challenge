@@ -13,7 +13,10 @@ export function DiscoverMovies() {
     fetchStatesInitialState
   );
 
-  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState({
+    movies: [],
+    isFiltering: false,
+  });
 
   useEffect(
     function getMovies() {
@@ -22,39 +25,45 @@ export function DiscoverMovies() {
     [dispatch]
   );
 
-  const moviesList = state.movieSearchResults.length
-    ? state.movieSearchResults
-    : state.movies;
+  const searchResults =
+    Boolean(state.movieSearchResults.length) && state.movieSearchResults;
+  const filterResults =
+    Boolean(filteredMovies.movies.length) && filteredMovies.movies;
 
-  const onFilterChange = ({ minRange, maxRange, clearFilter }) => {
-    const newFilteredMovies = moviesList.filter(({ vote_average }) => {
-      const isOnAverageRange =
-        vote_average >= minRange && vote_average <= maxRange;
+  const searchError =
+    state.isSearching &&
+    !searchResults &&
+    "No results for your search criteria";
 
-      return isOnAverageRange && !clearFilter;
-    });
-    setFilteredMovies(newFilteredMovies);
-  };
+  const filterError =
+    filteredMovies.isFiltering &&
+    !filterResults &&
+    "No results for your filtering criteria";
 
-  const moviesToRender = filteredMovies.length ? filteredMovies : moviesList;
+  const moviesList = searchResults || state.movies;
+  const moviesToRender = filterResults || searchResults || state.movies;
 
   return (
     <div>
       <SearchMovies onResults={dispatch} />
-      <RateFilterMovies onFilterChange={onFilterChange} />
-      {state.isLoading ? (
-        "...Loading"
-      ) : (
-        <ul>
-          {moviesToRender.map(({ title, id, vote_average }) => (
-            <li key={id}>
-              <a href="#1">
-                {title} - {vote_average}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+      <RateFilterMovies
+        onFilterChange={setFilteredMovies}
+        dataToFilter={moviesList}
+      />
+      {state.isLoading
+        ? "...Loading"
+        : searchError ||
+          filterError || (
+            <ul>
+              {moviesToRender.map(({ title, id, vote_average }) => (
+                <li key={id}>
+                  <a href="#1">
+                    {title} - {vote_average}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
     </div>
   );
 }
