@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 export function RateFilterMovies({
@@ -6,21 +6,34 @@ export function RateFilterMovies({
   maxScoreRange,
   starsSteps,
 }) {
-  const onClickStar = ({ currentTarget }) => {
+  const [activeRate, setActiveRate] = useState(-1);
+
+  const onClickStar = ({ currentTarget: { id } }) => {
+    const elementId = Number(id);
     const filterStep = maxScoreRange / starsSteps;
-    const minRange = currentTarget.id * filterStep;
+    const minRange = elementId * filterStep;
     const maxRange = minRange + filterStep;
 
-    onFilterChange({ minRange, maxRange });
+    const clearFilter = activeRate === elementId;
+    onFilterChange({ minRange, maxRange, clearFilter });
+    setActiveRate(clearFilter ? -1 : elementId);
   };
 
   return (
     <div>
-      {Array.from(Array(starsSteps).keys()).map((_, index) => (
-        <span id={index} key={index} onClick={onClickStar}>
-          {index}
-        </span>
-      ))}
+      {Array.from(Array(starsSteps).keys()).map((_, index) => {
+        const isSelected = activeRate === index;
+        return (
+          <span
+            id={index}
+            key={index}
+            onClick={onClickStar}
+            className={isSelected ? "active" : ""}
+          >
+            {index}
+          </span>
+        );
+      })}
     </div>
   );
 }
