@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { moviesService } from "../services/movies.service";
+import { Loader } from "../shared-components/Loader/Loader.component";
 
 export function MovieDetail({
   match: {
@@ -21,6 +22,6 @@ export function MovieDetail({
       <img src={movieDetail.poster_path} alt={movieDetail.original_title} />
     </div>
   ) : (
-    "Loading"
+    <Loader />
   );
 }
