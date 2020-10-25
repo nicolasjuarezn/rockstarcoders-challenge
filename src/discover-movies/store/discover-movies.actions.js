@@ -18,7 +18,8 @@ export const setMovies = (movies) => ({
   movies,
 });
 
-export const setSearchResults = (movieSearchResults) => ({
+export const setSearchResults = ({ movieSearchResults, isSearching }) => ({
   type: SET_SEARCH_RESULTS,
   movieSearchResults,
+  isSearching,
 });

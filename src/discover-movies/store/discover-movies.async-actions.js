@@ -20,10 +20,15 @@ export const fetchMoviesToDiscover = async (dispatch) => {
 export const fetchSearchMovies = async (dispatch, searchValue) => {
   dispatch(startFetchLoading());
   try {
-    const movieSearchResults = await moviesService.searchMovies(searchValue);
-    dispatch(setSearchResults(movieSearchResults));
+    if (searchValue) {
+      const movieSearchResults = await moviesService.searchMovies(searchValue);
+      dispatch(setSearchResults({ movieSearchResults, isSearching: true }));
+    } else {
+      dispatch(
+        setSearchResults({ movieSearchResults: [], isSearching: false })
+      );
+    }
   } catch (error) {
-    dispatch(setSearchResults([]));
     dispatch(stopFetchLoading());
   }
 };

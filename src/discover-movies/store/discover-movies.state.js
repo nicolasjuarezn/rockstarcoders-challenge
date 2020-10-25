@@ -24,6 +24,7 @@ export function fetchStatesReducer(state, action) {
       return {
         ...state,
         movieSearchResults: action.movieSearchResults,
+        isSearching: action.isSearching,
         isLoading: false,
       };
     default:
