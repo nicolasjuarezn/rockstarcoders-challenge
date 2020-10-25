@@ -1,0 +1,29 @@
+.discover_movies_header {
+  padding: 50px 0;
+  background: gray;
+  margin: 0 0 30px;
+  text-align: center;
+}
+
+.discover_movies_header__wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.discover_movies_header__title,
+.discover_movies_header__highlight {
+  color: white;
+  width: 100%;
+}
+
+.discover_movies_header__title {
+  font-size: 30px;
+}
+
+.discover_movies_header__highlight {
+  font-size: 22px;
+  margin: 0 0 30px;
+}

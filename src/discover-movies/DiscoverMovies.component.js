@@ -13,6 +13,12 @@ import {
   fetchStatesInitialState,
   fetchStatesReducer,
 } from "./store/discover-movies.state";
+import {
+  discover_movies_header,
+  discover_movies_header__wrapper,
+  discover_movies_header__title,
+  discover_movies_header__highlight,
+} from "./DiscoverMovies.module.css";
 
 export function DiscoverMovies() {
   const [state, dispatch] = useReducer(
@@ -44,15 +50,23 @@ export function DiscoverMovies() {
   const moviesToRender = filterResults || searchResults || state.movies;
 
   return (
-    <div>
-      <header>
-        <SearchMovies
-          onSubmit={(searchValue) => fetchSearchMovies(dispatch, searchValue)}
-        />
-        <RateFilterMovies
-          onFilterChange={onFilterChange}
-          dataToFilter={dataToFilter}
-        />
+    <>
+      <header className={discover_movies_header}>
+        <div className={discover_movies_header__wrapper}>
+          <h1 className={discover_movies_header__title}>
+            Discover your favorite movies
+          </h1>
+          <p className={discover_movies_header__highlight}>
+            Search or filter by your preferences
+          </p>
+          <SearchMovies
+            onSubmit={(searchValue) => fetchSearchMovies(dispatch, searchValue)}
+          />
+          <RateFilterMovies
+            onFilterChange={onFilterChange}
+            dataToFilter={dataToFilter}
+          />
+        </div>
       </header>
       {state.isLoading ? (
         <Loader />
@@ -62,6 +76,6 @@ export function DiscoverMovies() {
           errorMessageResult={errorMessageResult}
         />
       )}
-    </div>
+    </>
   );
 }
