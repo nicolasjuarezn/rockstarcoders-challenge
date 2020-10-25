@@ -17,10 +17,12 @@ export function DiscoverMovies() {
 
   const moviesList = movieSearchResult.length ? movieSearchResult : movies;
 
-  const onFilterChange = ({ minRange, maxRange }) => {
-    const filteredMovies = moviesList.filter(
-      ({ vote_average }) => vote_average >= minRange && vote_average <= maxRange
-    );
+  const onFilterChange = ({ minRange, maxRange, clearFilter }) => {
+    const filteredMovies = moviesList.filter(({ vote_average }) => {
+      const isOnAverageRange =
+        vote_average >= minRange && vote_average <= maxRange;
+      return isOnAverageRange && !clearFilter;
+    });
     setFilteredMovies(filteredMovies);
   };
 
