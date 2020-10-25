@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer } from "react";
+import { MoviesList } from "./components/MoviesList/MoviesList.component";
 import { RateFilterMovies } from "./components/RateFilterMovies/RateFilterMovies.component";
 import { SearchMovies } from "./components/SearchMovies/SearchMovies.component";
 import { setFilteredMovies } from "./store/discover-movies.actions";
@@ -39,6 +40,7 @@ export function DiscoverMovies() {
     !filterResults &&
     "No results for your filtering criteria";
 
+  const errorMessageResult = searchError || filterError || "";
   const moviesList = searchResults || state.movies;
   const moviesToRender = filterResults || searchResults || state.movies;
 
@@ -53,20 +55,14 @@ export function DiscoverMovies() {
         }}
         dataToFilter={moviesList}
       />
-      {state.isLoading
-        ? "...Loading"
-        : searchError ||
-          filterError || (
-            <ul>
-              {moviesToRender.map(({ title, id, vote_average }) => (
-                <li key={id}>
-                  <a href="#1">
-                    {title} - {vote_average}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
+      {state.isLoading ? (
+        "...Loading"
+      ) : (
+        <MoviesList
+          movies={moviesToRender}
+          errorMessageResult={errorMessageResult}
+        />
+      )}
     </div>
   );
 }
