@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useCallback, useEffect, useReducer } from "react";
 import { MoviesList } from "./components/MoviesList/MoviesList.component";
 import { RateFilterMovies } from "./components/RateFilterMovies/RateFilterMovies.component";
 import { SearchMovies } from "./components/SearchMovies/SearchMovies.component";
@@ -25,10 +25,16 @@ export function DiscoverMovies() {
     [dispatch]
   );
 
+  const onFilterChange = useCallback(
+    ({ filteredMovies, isFiltering }) => {
+      dispatch(setFilteredMovies({ filteredMovies, isFiltering }));
+    },
+    [dispatch]
+  );
+
   const searchResults =
-    Boolean(state.movieSearchResults.length) && state.movieSearchResults;
-  const filterResults =
-    Boolean(state.filteredMovies.length) && state.filteredMovies;
+    state.movieSearchResults.length && state.movieSearchResults;
+  const filterResults = state.filteredMovies.length && state.filteredMovies;
 
   const searchError =
     state.isSearching &&
@@ -50,9 +56,7 @@ export function DiscoverMovies() {
         onSubmit={(searchValue) => fetchSearchMovies(dispatch, searchValue)}
       />
       <RateFilterMovies
-        onFilterChange={({ filteredMovies, isFiltering }) => {
-          dispatch(setFilteredMovies({ filteredMovies, isFiltering }));
-        }}
+        onFilterChange={onFilterChange}
         dataToFilter={moviesList}
       />
       {state.isLoading ? (

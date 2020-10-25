@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 export function RateFilterMovies({
@@ -8,24 +8,37 @@ export function RateFilterMovies({
   dataToFilter,
 }) {
   const [activeRate, setActiveRate] = useState(-1);
+  const [filters, setFilters] = useState({
+    minRange: 0,
+    maxRange: maxScoreRange,
+  });
 
   const onClickStar = ({ currentTarget: { id } }) => {
     const elementId = Number(id);
     const filterStep = maxScoreRange / starsSteps;
     const minRange = elementId * filterStep;
     const maxRange = minRange + filterStep;
-    const clearFilter = activeRate === elementId;
+    const newActiveRate = activeRate === elementId ? -1 : elementId;
 
-    const filteredMovies = dataToFilter.filter(({ vote_average }) => {
-      return (
-        vote_average >= minRange && vote_average <= maxRange && !clearFilter
-      );
-    });
-
-    const newActiveRate = clearFilter ? -1 : elementId;
     setActiveRate(newActiveRate);
-    onFilterChange({ filteredMovies, isFiltering: newActiveRate > -1 });
+    setFilters({ minRange, maxRange });
   };
+
+  useEffect(
+    function updateFilterResults() {
+      const isFiltering = activeRate > -1;
+      const filteredMovies = dataToFilter.filter(({ vote_average }) => {
+        return (
+          vote_average >= filters.minRange &&
+          vote_average <= filters.maxRange &&
+          isFiltering
+        );
+      });
+
+      onFilterChange({ filteredMovies, isFiltering });
+    },
+    [onFilterChange, filters, dataToFilter, activeRate]
+  );
 
   return (
     <div>
