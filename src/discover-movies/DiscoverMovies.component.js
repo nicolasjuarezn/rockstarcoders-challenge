@@ -7,6 +7,7 @@ import {
   fetchMoviesToDiscover,
   fetchSearchMovies,
 } from "./store/discover-movies.async-actions";
+import { getErrorMessageResult } from "./store/discover-movies.selectors";
 import {
   fetchStatesInitialState,
   fetchStatesReducer,
@@ -32,22 +33,13 @@ export function DiscoverMovies() {
     [dispatch]
   );
 
+  const errorMessageResult = getErrorMessageResult(state);
+
   const searchResults =
     state.movieSearchResults.length && state.movieSearchResults;
   const filterResults = state.filteredMovies.length && state.filteredMovies;
 
-  const searchError =
-    state.isSearching &&
-    !searchResults &&
-    "No results for your search criteria";
-
-  const filterError =
-    state.isFiltering &&
-    !filterResults &&
-    "No results for your filtering criteria";
-
-  const errorMessageResult = searchError || filterError || "";
-  const moviesList = searchResults || state.movies;
+  const dataToFilter = searchResults || state.movies;
   const moviesToRender = filterResults || searchResults || state.movies;
 
   return (
@@ -57,7 +49,7 @@ export function DiscoverMovies() {
       />
       <RateFilterMovies
         onFilterChange={onFilterChange}
-        dataToFilter={moviesList}
+        dataToFilter={dataToFilter}
       />
       {state.isLoading ? (
         "...Loading"
