@@ -10,37 +10,31 @@ class MoviesService {
 
   async fetchProvider() {
     const response = await fetch(...arguments);
-    return await response.json();
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw new Error(`${response.status}: Something went wrong`);
+    }
   }
 
   async getDiscoverMovies() {
-    try {
-      const discoverMoviesURL = this.buildURL({
-        path: "discover/movie",
-        query: "&sort_by=popularity.desc&page=1",
-      });
+    const discoverMoviesURL = this.buildURL({
+      path: "discover/movie",
+      query: "&sort_by=popularity.desc&page=1",
+    });
 
-      const { results } = await this.fetchProvider(discoverMoviesURL);
-
-      return results;
-    } catch (error) {
-      console.warn("discoverMovies", error);
-    }
+    const { results } = await this.fetchProvider(discoverMoviesURL);
+    return results;
   }
 
   async searchMovies(value) {
-    try {
-      const searchMoviesURL = this.buildURL({
-        path: "search/movie",
-        query: `&query=${value}&page=1`,
-      });
+    const searchMoviesURL = this.buildURL({
+      path: "search/movie",
+      query: `&query=${value}&page=1`,
+    });
 
-      const { results } = await this.fetchProvider(searchMoviesURL);
-
-      return results;
-    } catch (error) {
-      console.warn("searchMovies", error);
-    }
+    const { results } = await this.fetchProvider(searchMoviesURL);
+    return results;
   }
 }
 
