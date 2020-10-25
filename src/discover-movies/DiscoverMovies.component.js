@@ -45,13 +45,15 @@ export function DiscoverMovies() {
 
   return (
     <div>
-      <SearchMovies
-        onSubmit={(searchValue) => fetchSearchMovies(dispatch, searchValue)}
-      />
-      <RateFilterMovies
-        onFilterChange={onFilterChange}
-        dataToFilter={dataToFilter}
-      />
+      <header>
+        <SearchMovies
+          onSubmit={(searchValue) => fetchSearchMovies(dispatch, searchValue)}
+        />
+        <RateFilterMovies
+          onFilterChange={onFilterChange}
+          dataToFilter={dataToFilter}
+        />
+      </header>
       {state.isLoading ? (
         <Loader />
       ) : (
