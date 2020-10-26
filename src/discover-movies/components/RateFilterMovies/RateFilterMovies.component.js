@@ -32,9 +32,10 @@ export function RateFilterMovies({
     setFilters({ minRange, maxRange });
   };
 
+  const isFiltering = activeRate > -1;
+
   useEffect(
     function updateFilterResults() {
-      const isFiltering = activeRate > -1;
       const filteredMovies = dataToFilter.filter(({ vote_average }) => {
         return (
           vote_average >= filters.minRange &&
@@ -45,7 +46,7 @@ export function RateFilterMovies({
 
       onFilterChange({ filteredMovies, isFiltering });
     },
-    [onFilterChange, filters, dataToFilter, activeRate]
+    [onFilterChange, filters, dataToFilter, activeRate, isFiltering]
   );
 
   return (
@@ -53,7 +54,7 @@ export function RateFilterMovies({
       <span className={filter_title}>Rating:</span>
       <div
         className={`${filter_wrapper} ${
-          activeRate > -1 ? filter_wrapper___filtering : ""
+          isFiltering ? filter_wrapper___filtering : ""
         }`}
       >
         {Array.from(Array(starsSteps).keys()).map((_, index) => {
