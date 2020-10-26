@@ -46,7 +46,7 @@ class MoviesService {
   async searchMovies(value) {
     const searchMoviesURL = this.buildURL({
       path: "search/movie",
-      query: `&query=${value}&page=1`,
+      query: `&sort_by=popularity.desc&query=${value}&page=1`,
     });
 
     const { results } = await this.fetchProvider(searchMoviesURL);
