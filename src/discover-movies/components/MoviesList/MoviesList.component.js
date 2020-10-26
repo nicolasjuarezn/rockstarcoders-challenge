@@ -13,7 +13,7 @@ export function MoviesList({ movies, errorMessageResult }) {
   ) : (
     <ul className={movie_list}>
       {movies.map(({ title, id, poster_path }) => (
-        <li key={id} className={movie_list__li}>
+        <li key={id} className={movie_list__li} title={title}>
           <Link to={`movie/${id}`}>
             <img src={poster_path} alt={title} />
           </Link>
