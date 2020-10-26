@@ -1,5 +1,10 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
+import {
+  search_form,
+  search_form__input,
+  search_form__button,
+} from "./SearchMovies.module.css";
 
 export function SearchMovies({ onSubmit }) {
   const searchInput = useRef(null);
@@ -11,15 +16,18 @@ export function SearchMovies({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={onSubmitSearch}>
+    <form onSubmit={onSubmitSearch} className={search_form}>
       <input
         type="search"
         placeholder="Type your search here"
         name="search"
         id="search"
         ref={searchInput}
+        className={search_form__input}
       />
-      <button type="submit">Search</button>
+      <button type="submit" className={search_form__button}>
+        Search
+      </button>
     </form>
   );
 }
