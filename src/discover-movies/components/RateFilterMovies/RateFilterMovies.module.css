@@ -1,0 +1,60 @@
+.filter_title {
+  font-size: 16px;
+  line-height: 1em;
+  margin: 0 10px 0;
+}
+
+.filter_box {
+  display: flex;
+  align-items: center;
+}
+
+.filter_item {
+  font-size: 0;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: none;
+  appearance: none;
+  position: relative;
+  background: url("/icons/empty-star-icon.svg") no-repeat center center;
+  outline: none;
+  border-radius: 0;
+  margin: 0 4px 0;
+}
+
+.filter_item:last-child {
+  margin: 0;
+}
+
+.filter_item:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: url("/icons/filled-star-icon.svg") no-repeat center center;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.filter_wrapper {
+  font-size: 0;
+  background: #c2c2c2;
+  padding: 5px;
+  border: 1px solid #8f8f8f;
+  border-radius: 4px;
+}
+
+.filter_wrapper:hover .filter_item:before,
+.filter_wrapper___filtering .filter_item:before {
+  opacity: 1;
+}
+
+.filter_item:hover ~ .filter_item:before,
+.filter_item___active ~ .filter_item:before {
+  opacity: 0;
+}

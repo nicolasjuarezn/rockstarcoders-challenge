@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import {
+  filter_box,
+  filter_item___active,
+  filter_item,
+  filter_title,
+  filter_wrapper___filtering,
+  filter_wrapper,
+} from "./RateFilterMovies.module.css";
 
 export function RateFilterMovies({
   onFilterChange,
@@ -41,20 +49,29 @@ export function RateFilterMovies({
   );
 
   return (
-    <div>
-      {Array.from(Array(starsSteps).keys()).map((_, index) => {
-        const isSelected = activeRate === index;
-        return (
-          <span
-            id={index}
-            key={index}
-            onClick={onClickStar}
-            className={isSelected ? "active" : ""}
-          >
-            {index}
-          </span>
-        );
-      })}
+    <div className={filter_box}>
+      <span className={filter_title}>Rating:</span>
+      <div
+        className={`${filter_wrapper} ${
+          activeRate > -1 ? filter_wrapper___filtering : ""
+        }`}
+      >
+        {Array.from(Array(starsSteps).keys()).map((_, index) => {
+          const isSelected = activeRate === index;
+          return (
+            <button
+              id={index}
+              key={index}
+              onClick={onClickStar}
+              className={`${filter_item} ${
+                isSelected ? filter_item___active : ""
+              }`}
+            >
+              {index}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
