@@ -33,7 +33,7 @@ class MoviesService {
     return `${this.baseImageURL}${size}/${imageSRC}`;
   }
 
-  async getDiscoverMovies() {
+  async discoverMovies() {
     const discoverMoviesURL = this.buildURL({
       path: "discover/movie",
       query: "&sort_by=popularity.desc&page=1",

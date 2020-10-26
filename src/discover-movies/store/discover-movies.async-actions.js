@@ -9,7 +9,7 @@ import {
 export const fetchMoviesToDiscover = async (dispatch) => {
   dispatch(startLoading());
   try {
-    const movies = await moviesService.getDiscoverMovies();
+    const movies = await moviesService.discoverMovies();
     dispatch(setMovies(movies));
   } catch (error) {
     dispatch(setMovies([]));
