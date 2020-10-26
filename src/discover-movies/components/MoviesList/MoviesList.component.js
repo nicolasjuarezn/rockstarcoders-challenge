@@ -12,10 +12,9 @@ export function MoviesList({ movies, errorMessageResult }) {
     <p className={error_message}>{errorMessageResult}</p>
   ) : (
     <ul className={movie_list}>
-      {movies.map(({ title, id, vote_average, poster_path }) => (
+      {movies.map(({ title, id, poster_path }) => (
         <li key={id} className={movie_list__li}>
           <Link to={`movie/${id}`}>
-            {title} - {vote_average}
             <img src={poster_path} alt={title} />
           </Link>
         </li>
