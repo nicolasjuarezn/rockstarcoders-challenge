@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useReducer } from "react";
+import { Header } from "../shared-components/Header/Header.component";
 import { Loader } from "../shared-components/Loader/Loader.component";
 import { MoviesList } from "./components/MoviesList/MoviesList.component";
 import { RateFilterMovies } from "./components/RateFilterMovies/RateFilterMovies.component";
@@ -13,12 +14,6 @@ import {
   fetchStatesInitialState,
   fetchStatesReducer,
 } from "./store/discover-movies.state";
-import {
-  discover_movies_header,
-  discover_movies_header__wrapper,
-  discover_movies_header__title,
-  discover_movies_header__highlight,
-} from "./DiscoverMovies.module.css";
 
 export function DiscoverMovies() {
   const [state, dispatch] = useReducer(
@@ -51,23 +46,15 @@ export function DiscoverMovies() {
 
   return (
     <>
-      <header className={discover_movies_header}>
-        <div className={discover_movies_header__wrapper}>
-          <h1 className={discover_movies_header__title}>
-            Discover your favorite movies
-          </h1>
-          <p className={discover_movies_header__highlight}>
-            Search or filter by your preferences
-          </p>
-          <SearchMovies
-            onSubmit={(searchValue) => fetchSearchMovies(dispatch, searchValue)}
-          />
-          <RateFilterMovies
-            onFilterChange={onFilterChange}
-            dataToFilter={dataToFilter}
-          />
-        </div>
-      </header>
+      <Header highlight="Search or filter by your preferences">
+        <SearchMovies
+          onSubmit={(searchValue) => fetchSearchMovies(dispatch, searchValue)}
+        />
+        <RateFilterMovies
+          onFilterChange={onFilterChange}
+          dataToFilter={dataToFilter}
+        />
+      </Header>
       {state.isLoading ? (
         <Loader />
       ) : (

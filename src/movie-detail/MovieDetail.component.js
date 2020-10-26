@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { moviesService } from "../services/movies.service";
+import { Header } from "../shared-components/Header/Header.component";
 import { Loader } from "../shared-components/Loader/Loader.component";
 
 export function MovieDetail({
@@ -17,14 +18,22 @@ export function MovieDetail({
     [id, setMovieDetail]
   );
 
-  return movieDetail.original_title ? (
-    <div>
-      <Link to="/">Go back to home</Link>
-      <h1>{movieDetail.original_title}</h1>
-      <img src={movieDetail.poster_path} alt={movieDetail.original_title} />
-      <img src={movieDetail.backdrop_path} alt={movieDetail.original_title} />
-    </div>
-  ) : (
-    <Loader />
+  return (
+    <>
+      <Header highlight={movieDetail.original_title}>
+        <Link to="/">Go back to home</Link>
+      </Header>
+      {movieDetail.original_title ? (
+        <div>
+          <img src={movieDetail.poster_path} alt={movieDetail.original_title} />
+          <img
+            src={movieDetail.backdrop_path}
+            alt={movieDetail.original_title}
+          />
+        </div>
+      ) : (
+        <Loader />
+      )}
+    </>
   );
 }
