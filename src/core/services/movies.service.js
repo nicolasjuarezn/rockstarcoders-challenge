@@ -5,7 +5,6 @@ class MoviesService {
     this.baseImageURL = "https://image.tmdb.org/t/p/";
     this.defaultW300Image = "/imgs/300x450poster-not-available.png";
     this.defaultW1280Image = "/imgs/1280x720poster-not-available.png";
-    this.defaultW154Image = "/imgs/154x231poster-not-available.png";
   }
 
   buildURL({ path, query = "" }) {
@@ -15,7 +14,7 @@ class MoviesService {
   parseMoviesList(movies) {
     return movies.map(({ poster_path, ...movie }) => ({
       poster_path: poster_path
-        ? this.parseResponseImages(poster_path, "w300")
+        ? this.parseResponseImages(poster_path)
         : this.defaultW300Image,
       ...movie,
     }));
@@ -30,7 +29,7 @@ class MoviesService {
     }
   }
 
-  parseResponseImages(imageSRC, size = "w154") {
+  parseResponseImages(imageSRC, size = "w300") {
     return `${this.baseImageURL}${size}/${imageSRC}`;
   }
 
