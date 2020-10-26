@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useReducer } from "react";
+import { parseQuery } from "../core/helpers/query-parse.helpers";
 import { Header } from "../shared-components/Header/Header.component";
 import { Loader } from "../shared-components/Loader/Loader.component";
 import { MoviesList } from "./components/MoviesList/MoviesList.component";
@@ -23,6 +24,12 @@ export function DiscoverMovies() {
 
   useEffect(
     function getMovies() {
+      const { search } = parseQuery(window.location.search);
+
+      if (search) {
+        fetchSearchMovies(dispatch, search);
+      }
+
       fetchMoviesToDiscover(dispatch);
     },
     [dispatch]
