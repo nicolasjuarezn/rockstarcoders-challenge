@@ -12,6 +12,7 @@
 .filter_item {
   font-size: 0;
   display: inline-block;
+  cursor: pointer;
   width: 22px;
   height: 22px;
   border: none;
