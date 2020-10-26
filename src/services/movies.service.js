@@ -3,6 +3,9 @@ class MoviesService {
     this.APIKey = "0650dc23d9158fa968f70eaad71ff3fd";
     this.baseURL = "https://api.themoviedb.org/3/";
     this.baseImageURL = "https://image.tmdb.org/t/p/";
+    this.defaultW300Image = "/imgs/300x450poster-not-available.png";
+    this.defaultW1280Image = "/imgs/1280x720poster-not-available.png";
+    this.defaultW154Image = "/imgs/154x231poster-not-available.png";
   }
 
   buildURL({ path, query = "" }) {
@@ -11,7 +14,9 @@ class MoviesService {
 
   parseMoviesList(movies) {
     return movies.map(({ poster_path, ...movie }) => ({
-      poster_path: this.parseResponseImages(poster_path),
+      poster_path: poster_path
+        ? this.parseResponseImages(poster_path, "w300")
+        : this.defaultW300Image,
       ...movie,
     }));
   }
@@ -62,8 +67,12 @@ class MoviesService {
 
     return {
       ...response,
-      backdrop_path: this.parseResponseImages(backdrop_path, "w1280"),
-      poster_path: this.parseResponseImages(poster_path),
+      backdrop_path: backdrop_path
+        ? this.parseResponseImages(backdrop_path, "w1280")
+        : this.defaultW1280Image,
+      poster_path: poster_path
+        ? this.parseResponseImages(poster_path)
+        : this.defaultW154Image,
     };
   }
 }
