@@ -26,6 +26,8 @@ export function Header({ children, highlight, backgroundSRC }) {
 
 Header.defaultProps = {
   highlight: "",
+  backgroundSRC: "",
+  children: null,
 };
 
 Header.propTypes = {
