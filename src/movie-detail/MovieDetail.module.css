@@ -47,4 +47,37 @@
 .detail_wrapper {
   max-width: 900px;
   margin: 0 auto;
+  padding: 0 0 40px 0;
+}
+
+.detail__text {
+  font-size: 14px;
+  line-height: 1em;
+  margin: 0 0 20px 0;
+}
+
+.detail__description {
+  display: flex;
+}
+
+.detail__figure {
+  display: block;
+  width: 300px;
+  height: auto;
+  margin: 0 20px 0 0;
+}
+
+.detail__overview {
+  font-size: 18px;
+  line-height: 1.3em;
+  color: rgba(0, 0, 0, 0.9);
+  font-weight: 300;
+}
+
+.detail__figure__figcaption {
+  font-size: 14px;
+  text-align: left;
+  padding: 5px 5px 5px 10px;
+  margin: 10px 0 0 0;
+  border-left: 2px solid rgba(0, 0, 0, 0.3);
 }

@@ -4,7 +4,15 @@ import { EN } from "../core/constants/languages.constants";
 import { Header } from "../shared-components/Header/Header.component";
 import { Loader } from "../shared-components/Loader/Loader.component";
 import { Genres } from "./components/Genres/Genres.component";
-import { header__link, detail_wrapper } from "./MovieDetail.module.css";
+import {
+  detail__text,
+  detail_wrapper,
+  header__link,
+  detail__overview,
+  detail__description,
+  detail__figure,
+  detail__figure__figcaption,
+} from "./MovieDetail.module.css";
 import { fetchMovieDetail } from "./store/movie-detail.async-actions";
 import {
   movieDetailInitialState,
@@ -36,6 +44,8 @@ export function MovieDetail({
     backdrop_path,
     genres,
     vote_average,
+    overview,
+    tagline,
   } = state.movieDetail;
 
   const isForeign = original_language !== EN;
@@ -58,8 +68,18 @@ export function MovieDetail({
       ) : (
         <div className={detail_wrapper}>
           {hasGenres && <Genres data={genres} />}
-          <p>Vote average: {vote_average}</p>
-          <img src={poster_path} alt={original_title} />
+          <p className={detail__text}>Vote average: {vote_average}</p>
+          <div className={detail__description}>
+            <figure className={detail__figure}>
+              <img src={poster_path} alt={original_title} />
+              {tagline && (
+                <figcaption className={detail__figure__figcaption}>
+                  {tagline}
+                </figcaption>
+              )}
+            </figure>
+            <p className={detail__overview}>{overview}</p>
+          </div>
         </div>
       )}
     </>
