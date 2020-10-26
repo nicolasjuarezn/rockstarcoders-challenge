@@ -7,6 +7,7 @@
   background: url("/imgs/the-boys-header.jpg") no-repeat center center;
   background-size: cover;
   position: relative;
+  overflow: hidden;
 }
 
 .header:before,
@@ -35,7 +36,7 @@
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 0.65) 100%
   );
-  z-index: 2;
+  z-index: 3;
 }
 
 .header:after {
@@ -57,7 +58,7 @@
     rgba(143, 2, 34, 0.44) 44%,
     rgba(109, 0, 25, 1) 100%
   );
-  z-index: 1;
+  z-index: 2;
 }
 
 .header__wrapper {
@@ -87,4 +88,25 @@
   font-size: 22px;
   margin: 0 0 50px;
   font-weight: 300;
+}
+
+.background_image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  animation: backgroundAppear 0.3s 0s ease forwards;
+}
+
+@keyframes backgroundAppear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

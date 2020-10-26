@@ -2,15 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import {
-  header,
-  header__wrapper,
-  header__title,
+  background_image,
   header__highlight,
+  header__title,
+  header__wrapper,
+  header,
 } from "./Header.module.css";
 
-export function Header({ children, highlight }) {
+export function Header({ children, highlight, backgroundSRC }) {
   return (
     <header className={header}>
+      {backgroundSRC && (
+        <img src={backgroundSRC} alt={highlight} className={background_image} />
+      )}
       <div className={header__wrapper}>
         <h1 className={header__title}>Discover your favorite movies</h1>
         <p className={header__highlight}>{highlight}</p>
@@ -29,5 +33,6 @@ Header.propTypes = {
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
   ]),
+  backgroundSRC: PropTypes.string,
   highlight: PropTypes.string,
 };
