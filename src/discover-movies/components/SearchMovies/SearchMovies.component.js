@@ -21,7 +21,7 @@ export function SearchMovies({ onSubmit }) {
   const { search } = parseQuery(window.location.search);
 
   return (
-    <form className={search_form}>
+    <form className={search_form} onSubmit={(event) => event.preventDefault()}>
       <input
         type="text"
         placeholder="Type your search here"
