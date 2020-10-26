@@ -7,8 +7,8 @@
 .movie_list__li {
   display: inline-block;
   vertical-align: top;
-  margin: 0 4% 20px 0;
-  width: 22%;
+  margin: 0 1.333% 10px 0;
+  width: 24%;
 }
 
 .movie_list__li:nth-child(4n) {
