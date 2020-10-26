@@ -11,14 +11,14 @@ import {
 } from "./store/discover-movies.async-actions";
 import { getErrorMessageResult } from "./store/discover-movies.selectors";
 import {
-  fetchStatesInitialState,
-  fetchStatesReducer,
+  discoverMoviesInitialState,
+  discoverMoviesReducer,
 } from "./store/discover-movies.state";
 
 export function DiscoverMovies() {
   const [state, dispatch] = useReducer(
-    fetchStatesReducer,
-    fetchStatesInitialState
+    discoverMoviesReducer,
+    discoverMoviesInitialState
   );
 
   useEffect(

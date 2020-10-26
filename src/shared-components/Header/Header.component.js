@@ -13,7 +13,7 @@ export function Header({ children, highlight }) {
     <header className={header}>
       <div className={header__wrapper}>
         <h1 className={header__title}>Discover your favorite movies</h1>
-        {highlight && <p className={header__highlight}>{highlight}</p>}
+        <p className={header__highlight}>{highlight}</p>
         {children}
       </div>
     </header>

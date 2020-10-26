@@ -1,24 +1,24 @@
-import { moviesService } from "../../services/movies.service";
+import { moviesService } from "../../core/services/movies.service";
 import {
   setMovies,
   setSearchResults,
-  startFetchLoading,
-  stopFetchLoading,
+  startLoading,
+  stopLoading,
 } from "./discover-movies.actions";
 
 export const fetchMoviesToDiscover = async (dispatch) => {
-  dispatch(startFetchLoading());
+  dispatch(startLoading());
   try {
     const movies = await moviesService.getDiscoverMovies();
     dispatch(setMovies(movies));
   } catch (error) {
     dispatch(setMovies([]));
-    dispatch(stopFetchLoading());
+    dispatch(stopLoading());
   }
 };
 
 export const fetchSearchMovies = async (dispatch, searchValue) => {
-  dispatch(startFetchLoading());
+  dispatch(startLoading());
   try {
     if (searchValue) {
       const movieSearchResults = await moviesService.searchMovies(searchValue);
@@ -29,6 +29,6 @@ export const fetchSearchMovies = async (dispatch, searchValue) => {
       );
     }
   } catch (error) {
-    dispatch(stopFetchLoading());
+    dispatch(stopLoading());
   }
 };

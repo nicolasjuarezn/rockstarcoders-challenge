@@ -33,6 +33,7 @@
   font-size: 0;
   line-height: 0;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .search_form__button:before,

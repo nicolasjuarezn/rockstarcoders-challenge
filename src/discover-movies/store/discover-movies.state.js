@@ -6,7 +6,7 @@ import {
   STOP_LOADING,
 } from "./discover-movies.action-types";
 
-export const fetchStatesInitialState = {
+export const discoverMoviesInitialState = {
   filteredMovies: [],
   isFiltering: false,
   isLoading: false,
@@ -14,7 +14,7 @@ export const fetchStatesInitialState = {
   movieSearchResults: [],
 };
 
-export function fetchStatesReducer(state, action) {
+export function discoverMoviesReducer(state, action) {
   switch (action.type) {
     case START_LOADING:
       return { ...state, isLoading: true };

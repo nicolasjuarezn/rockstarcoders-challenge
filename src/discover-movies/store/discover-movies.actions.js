@@ -6,11 +6,11 @@ import {
   STOP_LOADING,
 } from "./discover-movies.action-types";
 
-export const startFetchLoading = () => ({
+export const startLoading = () => ({
   type: START_LOADING,
 });
 
-export const stopFetchLoading = () => ({
+export const stopLoading = () => ({
   type: STOP_LOADING,
 });
 

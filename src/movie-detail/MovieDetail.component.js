@@ -1,29 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import { Link } from "react-router-dom";
-import { moviesService } from "../services/movies.service";
+import { EN } from "../core/constants/languages.constants";
 import { Header } from "../shared-components/Header/Header.component";
 import { Loader } from "../shared-components/Loader/Loader.component";
+import { header__link } from "./MovieDetail.module.css";
+import { fetchMovieDetail } from "./store/movie-detail.async-actions";
+import {
+  movieDetailInitialState,
+  movieDetailReducer,
+} from "./store/movie-detail.state";
 
 export function MovieDetail({
   match: {
     params: { id },
   },
 }) {
-  const [movieDetail, setMovieDetail] = useState({});
+  const [state, dispatch] = useReducer(
+    movieDetailReducer,
+    movieDetailInitialState
+  );
 
   useEffect(
     function getMovieDetail() {
-      moviesService.getMovieDetailById(id).then(setMovieDetail);
+      fetchMovieDetail(dispatch, id);
     },
-    [id, setMovieDetail]
+    [id, dispatch]
   );
+
+  const movieDetail = state.movieDetail;
+
+  const isForeign = movieDetail.original_language !== EN;
+
+  const movieTitle = isForeign
+    ? `${movieDetail.title} (${movieDetail.original_title})`
+    : movieDetail.title;
+
+  const highlight = !state.isLoading ? movieTitle : "";
 
   return (
     <>
-      <Header highlight={movieDetail.original_title}>
-        <Link to="/">Go back to home</Link>
+      <Header highlight={highlight}>
+        <Link to="/" className={header__link}>
+          Go back to home
+        </Link>
       </Header>
-      {movieDetail.original_title ? (
+      {state.isLoading ? (
+        <Loader />
+      ) : (
         <div>
           <img src={movieDetail.poster_path} alt={movieDetail.original_title} />
           <img
@@ -31,8 +54,6 @@ export function MovieDetail({
             alt={movieDetail.original_title}
           />
         </div>
-      ) : (
-        <Loader />
       )}
     </>
   );
