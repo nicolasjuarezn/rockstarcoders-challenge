@@ -18,7 +18,7 @@ export function SearchMovies({ onSubmit }) {
   return (
     <form onSubmit={onSubmitSearch} className={search_form}>
       <input
-        type="search"
+        type="text"
         placeholder="Type your search here"
         name="search"
         id="search"
