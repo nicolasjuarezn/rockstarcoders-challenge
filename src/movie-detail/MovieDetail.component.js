@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { EN } from "../core/constants/languages.constants";
 import { Header } from "../shared-components/Header/Header.component";
@@ -85,3 +86,7 @@ export function MovieDetail({
     </>
   );
 }
+
+MovieDetail.propTypes = {
+  match: PropTypes.object.isRequired,
+};
