@@ -1,15 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import styles from "./MoviesList.module.css";
+import {
+  error_message,
+  movie_list__li,
+  movie_list,
+} from "./MoviesList.module.css";
 
 export function MoviesList({ movies, errorMessageResult }) {
   return errorMessageResult ? (
-    <p>{errorMessageResult}</p>
+    <p className={error_message}>{errorMessageResult}</p>
   ) : (
-    <ul className={styles.movie_list}>
+    <ul className={movie_list}>
       {movies.map(({ title, id, vote_average, poster_path }) => (
-        <li key={id} className={styles.movie_list__li}>
+        <li key={id} className={movie_list__li}>
           <Link to={`movie/${id}`}>
             {title} - {vote_average}
             <img src={poster_path} alt={title} />
