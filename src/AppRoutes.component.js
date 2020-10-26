@@ -1,12 +1,12 @@
 import React from "react";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { MovieDetail } from "./movie-detail/MovieDetail.component";
 import { DiscoverMovies } from "./discover-movies/DiscoverMovies.component";
 
 export function AppRoutes() {
   return (
-    <Router>
+    <BrowserRouter>
       <Switch>
         <Route
           path="/"
@@ -19,6 +19,6 @@ export function AppRoutes() {
           component={(props) => <MovieDetail {...props} />}
         />
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 }
