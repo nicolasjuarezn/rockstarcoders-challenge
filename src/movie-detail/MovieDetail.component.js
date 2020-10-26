@@ -48,7 +48,7 @@ export function MovieDetail({
 
   return (
     <>
-      <Header highlight={highlight}>
+      <Header highlight={highlight} backgroundSRC={backdrop_path}>
         <Link to="/" className={header__link}>
           Go back to home
         </Link>
@@ -60,7 +60,6 @@ export function MovieDetail({
           {hasGenres && <Genres data={genres} />}
           <p>Vote average: {vote_average}</p>
           <img src={poster_path} alt={original_title} />
-          <img src={backdrop_path} alt={original_title} />
         </div>
       )}
     </>
