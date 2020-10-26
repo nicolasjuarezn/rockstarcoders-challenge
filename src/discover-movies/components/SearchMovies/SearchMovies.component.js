@@ -10,9 +10,8 @@ import { debounce } from "lodash";
 
 export function SearchMovies({ onSubmit }) {
   const onChangeInputSearch = debounce(({ target: { value: searchValue } }) => {
-    const url = searchValue
-      ? `${window.location.pathname}?search=${searchValue}`
-      : window.location.pathname;
+    const searchQuery = `?search=${searchValue}`;
+    const url = `${window.location.pathname}${searchValue ? searchQuery : ""}`;
 
     window.history.pushState({}, "", url);
     onSubmit(searchValue);
