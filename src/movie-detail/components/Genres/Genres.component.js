@@ -1,11 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { genres__wrapper, genres__li } from "./Genres.module.css";
 
 export function Genres({ data }) {
   return (
-    <ul>
+    <ul className={genres__wrapper}>
       {data.map(({ id, name }) => {
-        return <span key={id}>{name}</span>;
+        return (
+          <li key={id} className={genres__li}>
+            {name}
+          </li>
+        );
       })}
     </ul>
   );

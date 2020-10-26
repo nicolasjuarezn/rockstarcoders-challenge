@@ -1,0 +1,18 @@
+.genres__wrapper {
+  margin: 0 0 10px 0;
+}
+
+.genres__li {
+  padding: 6px;
+  background: rgb(173, 216, 230);
+  font-size: 14px;
+  line-height: 1em;
+  display: inline-block;
+  margin: 0 6px 6px 0;
+  border-radius: 4px;
+  color: rgb(37, 31, 54);
+}
+
+.genres__li:last-child {
+  margin: 0;
+}
