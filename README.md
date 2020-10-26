@@ -1,4 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+And Node 12.18.3, please be sure to have the same node version to avoid possible dependency errors.
 
 ## Available Scripts
 
@@ -17,4 +18,5 @@ You will also see any lint errors in the console.
 ```
 "react-router-dom": "^5.2.0"
 ```
+
 For routing purposes, a very common library.
