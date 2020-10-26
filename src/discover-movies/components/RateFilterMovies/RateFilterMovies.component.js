@@ -46,7 +46,7 @@ export function RateFilterMovies({
 
       onFilterChange({ filteredMovies, isFiltering });
     },
-    [onFilterChange, filters, dataToFilter, activeRate, isFiltering]
+    [onFilterChange, filters, dataToFilter, isFiltering]
   );
 
   return (
