@@ -9,6 +9,23 @@
   vertical-align: top;
   margin: 0 1.333% 10px 0;
   width: 24%;
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.movie_list__li:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0 0 19px 1px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .movie_list__li:nth-child(4n) {
@@ -19,6 +36,14 @@
   display: block;
   width: 100%;
   height: auto;
+}
+
+.movie_list__li:hover:before {
+  opacity: 1;
+}
+
+.movie_list__li:hover {
+  transform: scale(1.03);
 }
 
 .error_message {
