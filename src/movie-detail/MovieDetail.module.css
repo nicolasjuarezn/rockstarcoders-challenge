@@ -43,3 +43,8 @@
 .header__link:hover:before {
   left: 5px;
 }
+
+.detail_wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
