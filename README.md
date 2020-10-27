@@ -5,6 +5,8 @@ And Node 12.18.3, please be sure to have the same node version to avoid possible
 
 In the project directory, you can run:
 
+### `npm install`
+
 ### `npm start`
 
 Runs the app in the development mode.<br />
